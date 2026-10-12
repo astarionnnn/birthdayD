@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Birthday Gift 🎂
 
-## Getting Started
+Website kejutan ulang tahun. Next.js (App Router) + TypeScript + Tailwind CSS.
 
-First, run the development server:
+## Menjalankan di lokal
 
 ```bash
+npm install
+cp .env.example .env.local   # Windows: copy .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka http://localhost:3000. Untuk tes di HP (satu Wi-Fi), buka `http://IP-LAPTOP:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Struktur
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app` : halaman dan API routes
+- `src/components/sections` : section utama (Gate, GiftBox, dst)
+- `src/components/ui` : komponen kecil reusable
+- `src/data` : SEMUA konten yang bisa diedit (nama, tanggal, timeline, kupon, surat)
+- `src/lib`, `src/hooks` : helper dan hooks
+- `public/images`, `public/audio` : foto dan musik
 
-## Learn More
+Ubah nama dan tanggal ulang tahun di `src/data/site.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Push ke GitHub
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git add .
+git commit -m "tahap 1: setup project"
+git branch -M main
+git remote add origin https://github.com/USERNAME/birthday-gift.git
+git push -u origin main
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Gunakan repo **private** supaya isi kejutan tidak bocor.
 
-## Deploy on Vercel
+## Deploy ke Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Masuk ke vercel.com dan login dengan GitHub.
+2. Add New > Project > pilih repo `birthday-gift` > Deploy (setting default sudah benar).
+3. Setelah deploy, buka Settings > Environment Variables dan isi semua variabel dari `.env.example`.
+4. Isi `NEXT_PUBLIC_SITE_URL` dengan URL Vercel kamu, lalu Redeploy.
+5. Setiap `git push` ke `main` akan otomatis deploy ulang.
