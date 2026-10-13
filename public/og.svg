@@ -1,0 +1,32 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff7f0"/>
+      <stop offset="100%" stop-color="#ffd9c7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#ffc2d1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffd9c7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="80" fill="#ffc2d1" opacity="0.3"/>
+  <circle cx="1100" cy="530" r="100" fill="#ffd9c7" opacity="0.4"/>
+  <circle cx="1050" cy="80" r="50" fill="#ff8fab" opacity="0.2"/>
+  <circle cx="150" cy="550" r="60" fill="#ffc2d1" opacity="0.25"/>
+  <!-- Emoji -->
+  <text x="600" y="290" font-family="system-ui,sans-serif" font-size="130" text-anchor="middle">🎂</text>
+  <!-- Title -->
+  <text x="600" y="400" font-family="system-ui,sans-serif" font-size="52" font-weight="bold" fill="#e5486f" text-anchor="middle">Ada Kejutan Spesial Buat Kamu</text>
+  <!-- Subtitle -->
+  <text x="600" y="468" font-family="system-ui,sans-serif" font-size="28" fill="#7d5a6a" text-anchor="middle">Buka pelan-pelan ya 💛</text>
+  <!-- Hearts decoration -->
+  <text x="200" y="330" font-size="40" opacity="0.4">💕</text>
+  <text x="940" y="280" font-size="36" opacity="0.35">✨</text>
+  <text x="80" y="400" font-size="30" opacity="0.3">🌸</text>
+  <text x="1080" y="380" font-size="34" opacity="0.35">🌸</text>
+</svg>
+

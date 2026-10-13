@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { animate } from "animejs";
+import Typewriter from "typewriter-effect";
 import { loveLetterData } from "@/data/letter";
 import { siteConfig } from "@/data/site";
+import { bgmManager, playChimeSound } from "@/lib/audio";
 
 export default function LoveLetter() {
   const [isOpened, setIsOpened] = useState(false);
@@ -14,7 +16,7 @@ export default function LoveLetter() {
   const letterSheetRef = useRef<HTMLDivElement>(null);
   const heartsContainerRef = useRef<HTMLDivElement>(null);
 
-  // Animasi denyut halus pada segel stempel amplop (wax seal)
+  // Animasi denyut halus pada segel stempel amplop
   useEffect(() => {
     if (!isOpened && sealRef.current) {
       const sealAnim = animate(sealRef.current, {
@@ -30,7 +32,10 @@ export default function LoveLetter() {
   }, [isOpened]);
 
   const handleOpenEnvelope = () => {
-    // Animasi klik pada amplop
+    playChimeSound();
+    // Nyalakan musik latar lembut jika belum berbunyi
+    bgmManager.play();
+
     if (envelopeRef.current) {
       animate(envelopeRef.current, {
         scale: [1, 1.08, 0.95],
@@ -57,8 +62,8 @@ export default function LoveLetter() {
 
   const handleSendVirtualHug = () => {
     setHugCount((prev) => prev + 1);
+    playChimeSound();
 
-    // Menerbangkan 3-5 partikel hati & pelukan sekaligus dengan trajectory acak Anime.js
     if (heartsContainerRef.current) {
       const burstCount = 4;
       const icons = ["❤️", "💖", "🥰", "✨", "💕", "🤗", "💌"];
@@ -126,7 +131,6 @@ export default function LoveLetter() {
               onClick={handleOpenEnvelope}
               className="group relative h-56 w-72 sm:w-80 cursor-pointer rounded-2xl bg-gradient-to-br from-rose to-pink p-1 shadow-2xl transition-transform hover:scale-105 active:scale-95"
             >
-              {/* Desain Amplop */}
               <div className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-white/90 p-6 border-2 border-blush/80">
                 <span className="text-5xl select-none">💌</span>
                 <span className="mt-3 font-display text-base font-bold text-rose">
@@ -136,7 +140,7 @@ export default function LoveLetter() {
                   Dari {siteConfig.senderName}
                 </span>
 
-                {/* Segel Stempel Lilin (Wax Seal) Teranimasi */}
+                {/* Segel Stempel Lilin */}
                 <div
                   ref={sealRef}
                   className="mt-4 rounded-full bg-rose px-4 py-1.5 font-display text-xs font-bold text-white shadow-md group-hover:bg-rose/90 transition-colors"
@@ -147,7 +151,7 @@ export default function LoveLetter() {
             </div>
           </div>
         ) : (
-          /* Kertas Surat Terbuka */
+          /* Kertas Surat Terbuka dengan Efek Ketik Pelan */
           <div
             ref={letterSheetRef}
             className="relative mt-8 rounded-3xl border-2 border-blush/70 bg-[#fffdfa] p-6 text-left shadow-2xl sm:p-10 origin-top"
@@ -160,7 +164,7 @@ export default function LoveLetter() {
             {/* Header Surat */}
             <div className="border-b border-peach/70 pb-4 mb-6">
               <span className="text-xs font-bold uppercase tracking-widest text-rose">
-                Pesan Rahasia Dari Lubuk Hati
+                Sepucuk Surat Dari Lubuk Hati
               </span>
               <h3 className="mt-1 font-display text-2xl font-bold text-rose sm:text-3xl">
                 {loveLetterData.letterTitle}
@@ -170,11 +174,27 @@ export default function LoveLetter() {
               </p>
             </div>
 
-            {/* Paragraf Surat */}
-            <div className="flex flex-col gap-4 text-sm sm:text-base leading-relaxed text-ink/90 font-body">
-              {loveLetterData.paragraphs.map((p, idx) => (
-                <p key={idx}>{p}</p>
-              ))}
+            {/* Paragraf Surat dengan Typewriter Effect Pelan */}
+            <div className="min-h-[220px] text-sm sm:text-base leading-relaxed text-ink/90 font-body">
+              <Typewriter
+                onInit={(typewriter) => {
+                  let chain = typewriter.changeDelay(25);
+                  loveLetterData.paragraphs.forEach((p, idx) => {
+                    chain = chain.typeString(
+                      `<p class="mb-4 leading-relaxed">${p}</p>`
+                    );
+                    if (idx < loveLetterData.paragraphs.length - 1) {
+                      chain = chain.pauseFor(350);
+                    }
+                  });
+                  chain.start();
+                }}
+                options={{
+                  autoStart: true,
+                  delay: 25,
+                  cursor: "🖋️",
+                }}
+              />
             </div>
 
             {/* Penutup & Tanda Tangan */}
@@ -196,7 +216,14 @@ export default function LoveLetter() {
               </div>
             )}
 
-            {/* Tombol Interaktif Pelukan & Lipat Surat */}
+            {/* Catatan Musik Latar — dari data/letter.ts field musicNote */}
+            {loveLetterData.musicNote && (
+              <p className="mt-4 text-center text-[11px] text-ink/40 italic select-none">
+                🎵 {loveLetterData.musicNote}
+              </p>
+            )}
+
+            {/* Tombol Interaktif Pelukan */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
               <button
                 type="button"
@@ -216,6 +243,16 @@ export default function LoveLetter() {
             </div>
           </div>
         )}
+
+        {/* Tombol Lanjut ke Section Kupon Hadiah */}
+        <div className="mt-16">
+          <a
+            href="#coupons"
+            className="inline-flex items-center gap-2 rounded-full border border-rose/30 bg-white/70 px-6 py-2.5 font-display text-sm font-semibold text-rose shadow-sm hover:bg-white hover:shadow transition-all cursor-pointer"
+          >
+            Klaim Kupon Hadiah Spesial 🎟️ 👇
+          </a>
+        </div>
       </div>
     </section>
   );

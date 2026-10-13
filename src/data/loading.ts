@@ -1,5 +1,5 @@
 // Daftar pesan kocak & romantis saat FunLoading berlangsung.
-// Bagian bertanda [GANTI] bisa disesuaikan dengan cerita/humor kalian berdua.
+// Ada 7 step loading — sesuaikan nada & isi pesan jika mau bertanda [GANTI].
 
 export interface LoadingStep {
   message: string;
@@ -8,28 +8,31 @@ export interface LoadingStep {
 
 export const loadingMessages: LoadingStep[] = [
   {
-    message: "Menghubungi satelit cinta untuk otorisasi akses... 🛰️", // [GANTI]
-    icon: "📡",
+    message: "Memuat kenangan yang sudah terlipat rapi di sudut hati...", // [GANTI]
+    icon: "💭",
   },
   {
-    message: "Mengukur tingkat kegemasan hari ini... (Error: Overload 9999%!) 🥰", // [GANTI]
-    icon: "💖",
+    message: "Menghitung seberapa sayang aku... ERROR 404: Angka Tidak Ditemukan, terlalu besar 💘", // [GANTI]
+    icon: "📈",
   },
   {
-    message: "Memanaskan oven virtual dan memanggang kue tart kesukaanmu... 🎂", // [GANTI]
-    icon: "🍰",
+    message: "Membangunkan kupu-kupu di perut buat tampil lagi...", // [GANTI]
+    icon: "🦋",
   },
   {
-    message: "Menyortir ribuan alasan kenapa kamu manusia paling gemesin... 📜", // [GANTI]
+    message: "Memasang lampu hias dan glitter di setiap sudut halaman...", // [GANTI]
     icon: "✨",
   },
   {
-    message: "Menyiapkan seember confetti dan pelukan paling erat... 🎉", // [GANTI]
-    icon: "🎁",
+    message: "Meminta izin ke bintang-bintang untuk meminjam cahayanya sebentar ⭐", // [GANTI]
+    icon: "🌟",
   },
   {
-    message: "Pintu kejutan hampir terbuka! Tarik napas dalam-dalam ya... 🥳", // [GANTI]
-    icon: "🔓",
+    message: "Menyiapkan kejutan terakhir yang paling manis...", // [GANTI]
+    icon: "🎂",
+  },
+  {
+    message: "SELESAI! Bersiap ya, ini dia! 🥳", // [GANTI]
+    icon: "🎉",
   },
 ];
-

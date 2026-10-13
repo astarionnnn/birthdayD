@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { animate, stagger } from "animejs";
 import confetti from "canvas-confetti";
 import { quizConfig } from "@/data/quiz";
+import { siteConfig } from "@/data/site";
+import { playPopSound, playChimeSound } from "@/lib/audio";
 
 export default function Quiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,7 +20,7 @@ export default function Quiz() {
   const currentQ = quizConfig.questions[currentIndex];
   const isAnswered = selectedOption !== null;
 
-  // Stagger masuk tiap opsi pilihan jawaban saat nomor soal berganti
+  // Stagger masuk tiap opsi pilihan jawaban saat berganti nomor
   useEffect(() => {
     if (!isFinished) {
       const validOptions = optionsRef.current.filter(Boolean);
@@ -26,8 +28,8 @@ export default function Quiz() {
         animate(validOptions, {
           opacity: [0, 1],
           translateX: [-15, 0],
-          delay: stagger(70),
-          duration: 400,
+          delay: stagger(60),
+          duration: 350,
           ease: "outQuad",
         });
       }
@@ -43,7 +45,7 @@ export default function Quiz() {
 
     if (isCorrect) {
       setScore((prev) => prev + 1);
-      // Animasi bounce selebrasi pada tombol yang benar
+      playChimeSound();
       if (selectedBtn) {
         animate(selectedBtn, {
           scale: [1, 1.05, 0.98, 1],
@@ -51,7 +53,6 @@ export default function Quiz() {
           ease: "outBack",
         });
       }
-      // Confetti kecil
       confetti({
         particleCount: 50,
         spread: 60,
@@ -59,7 +60,7 @@ export default function Quiz() {
         colors: ["#ff8fab", "#e5486f", "#ffd9c7", "#48cae4"],
       });
     } else {
-      // Animasi goyang (shake) saat salah
+      playPopSound(1);
       if (cardRef.current) {
         animate(cardRef.current, {
           translateX: [-10, 10, -7, 7, -3, 3, 0],
@@ -97,7 +98,20 @@ export default function Quiz() {
     } else {
       // Selesai kuis
       setIsFinished(true);
+
+      // Simpan skor opsional ke Supabase
+      fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipientName: siteConfig.recipientName,
+          score: 100,
+          totalQuestions: quizConfig.questions.length,
+        }),
+      }).catch((e) => console.log("Quiz save score optional:", e));
+
       setTimeout(() => {
+        playChimeSound();
         if (resultCardRef.current) {
           animate(resultCardRef.current, {
             scale: [0.85, 1],
@@ -106,10 +120,9 @@ export default function Quiz() {
             ease: "outBack",
           });
         }
-        // Selebrasi akhir kuis
         confetti({
-          particleCount: 120,
-          spread: 80,
+          particleCount: 140,
+          spread: 85,
           origin: { y: 0.6 },
         });
       }, 50);
@@ -124,13 +137,6 @@ export default function Quiz() {
   };
 
   const totalQuestions = quizConfig.questions.length;
-  const percentage = (score / totalQuestions) * 100;
-  const evaluation =
-    percentage === 100
-      ? quizConfig.results.perfect
-      : percentage >= 50
-      ? quizConfig.results.good
-      : quizConfig.results.remedial;
 
   return (
     <section
@@ -160,9 +166,9 @@ export default function Quiz() {
             {/* Header Nomor Pertanyaan & Progress */}
             <div className="flex items-center justify-between text-xs font-bold text-rose mb-3">
               <span>
-                Pertanyaan {currentIndex + 1} dari {totalQuestions}
+                Soal {currentIndex + 1} dari {totalQuestions}
               </span>
-              <span>Skor: {score}</span>
+              <span>Skor Sementara: {score * 20}</span>
             </div>
 
             {/* Progress Bar */}
@@ -219,16 +225,23 @@ export default function Quiz() {
               })}
             </div>
 
-            {/* Kotak Penjelasan / Pembahasan */}
+            {/* Kotak Penjelasan Lucu */}
             {isAnswered && (
               <div className="mt-5 rounded-2xl bg-peach/40 p-4 border border-blush/60">
                 <p className="text-xs font-semibold text-rose uppercase tracking-wide">
                   {selectedOption === currentQ.correctIndex
-                    ? "🎉 Jawabanmu Tepat!"
-                    : "😜 Ups, Kurang Tepat!"}
+                    ? "🎉 Jawabanmu Tepat Sekali!"
+                    : (() => {
+                        const responses = currentQ.wrongAnswerResponses;
+                        return responses?.length
+                          ? responses[Math.floor(Math.random() * responses.length)]
+                          : "😜 Tetot, Kurang Tepat!";
+                      })()}
                 </p>
                 <p className="mt-1 text-xs sm:text-sm text-ink/90">
-                  {currentQ.explanation}
+                  {selectedOption === currentQ.correctIndex
+                    ? currentQ.explanation
+                    : currentQ.explanation}
                 </p>
                 <div className="mt-4 flex justify-end">
                   <button
@@ -237,7 +250,7 @@ export default function Quiz() {
                     className="rounded-full bg-rose px-6 py-2 font-display text-xs sm:text-sm font-bold text-white shadow hover:bg-rose/90 transition-transform active:scale-95 cursor-pointer"
                   >
                     {currentIndex + 1 < totalQuestions
-                      ? "Lanjut Pertanyaan Berikutnya ➡️"
+                      ? "Soal Berikutnya ➡️"
                       : "Lihat Hasil Akhir 🏆"}
                   </button>
                 </div>
@@ -245,23 +258,24 @@ export default function Quiz() {
             )}
           </div>
         ) : (
-          /* Tampilan Hasil Akhir Kuis */
+          /* Tampilan Hasil Akhir Kuis - Selalu Lulus 100/100 */
           <div
             ref={resultCardRef}
             className="mt-8 rounded-3xl border-2 border-blush/80 bg-white/95 p-6 shadow-2xl backdrop-blur-md sm:p-8 text-center"
           >
-            <div className="text-6xl mb-3">{evaluation.emoji}</div>
+            <div className="text-6xl mb-3">🏆💖💯</div>
 
-            <div className="inline-block rounded-full bg-peach/60 px-4 py-1 text-xs font-bold text-rose mb-2">
-              SKOR: {score} / {totalQuestions} ({Math.round(percentage)}%)
+            <div className="inline-block rounded-full bg-peach/70 px-5 py-1.5 text-sm font-bold text-rose mb-3">
+              SKOR: {quizConfig.finalResult.scoreDisplay}
             </div>
 
             <h3 className="font-display text-2xl font-bold text-rose sm:text-3xl">
-              {evaluation.title}
+              {quizConfig.finalResult.title}
             </h3>
 
-            <p className="mt-3 text-sm text-ink/80 sm:text-base max-w-md mx-auto leading-relaxed">
-              {evaluation.desc}
+            {/* Teks Spesifikasi: "Skor kamu 100/100. Soalnya yang bikin aku, jadi aku yang nentuin." */}
+            <p className="mt-3 text-sm text-ink/90 sm:text-base max-w-md mx-auto leading-relaxed">
+              {quizConfig.finalResult.message}
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -270,14 +284,14 @@ export default function Quiz() {
                 onClick={handleRestart}
                 className="w-full sm:w-auto rounded-full border border-rose/40 bg-white px-5 py-2.5 font-display text-xs font-bold text-rose shadow-sm hover:bg-peach/30 transition-colors cursor-pointer"
               >
-                🔄 Ulangi Kuis
+                🔄 Coba Main Lagi
               </button>
 
               <a
-                href="#runaway"
+                href="#messages"
                 className="w-full sm:w-auto rounded-full bg-rose px-6 py-2.5 font-display text-xs font-bold text-white shadow hover:bg-rose/90 transition-transform active:scale-95 cursor-pointer"
               >
-                Pertanyaan Pamungkas! 👉
+                Lihat Pesan Teman & Keluarga 💌 👉
               </a>
             </div>
           </div>

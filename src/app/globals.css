@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+/* ─── Design Token ────────────────────────────────────────────────────────── */
 :root {
-  --cream: #fff7f0;
-  --peach: #ffd9c7;
-  --blush: #ffc2d1;
-  --pink: #ff8fab;
-  --rose: #e5486f;
-  --ink: #4a2c3a;
+  /* Palet hangat & manis */
+  --cream:      #fff7f0;   /* latar utama */
+  --cream-deep: #fdeede;   /* latar sekunder lebih hangat */
+  --peach:      #ffd9c7;   /* aksen peach lembut */
+  --peach-deep: #ffbfa3;   /* peach sedikit lebih jenuh */
+  --blush:      #ffc2d1;   /* pink blush */
+  --pink:       #ff8fab;   /* pink utama */
+  --rose:       #e5486f;   /* aksen merah-mawar kuat */
+  --rose-dark:  #c73058;   /* rose hover/active */
+  --gold:       #f59e0b;   /* aksen emas untuk badge/star */
+  --ink:        #4a2c3a;   /* teks utama (bukan full-black) */
+  --ink-light:  #7d5a6a;   /* teks sekunder */
+
+  /* Shadow token */
+  --shadow-card: 0 4px 24px -4px rgba(229,72,111,0.12);
+  --shadow-card-hover: 0 8px 32px -4px rgba(229,72,111,0.22);
 }
 
-/* Token warna & font dipakai sebagai class: bg-cream, text-rose, font-display, dst. */
+/* Token diekspos ke Tailwind v4 */
 @theme inline {
-  --color-cream: var(--cream);
-  --color-peach: var(--peach);
-  --color-blush: var(--blush);
-  --color-pink: var(--pink);
-  --color-rose: var(--rose);
-  --color-ink: var(--ink);
+  --color-cream:      var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-peach:      var(--peach);
+  --color-peach-deep: var(--peach-deep);
+  --color-blush:      var(--blush);
+  --color-pink:       var(--pink);
+  --color-rose:       var(--rose);
+  --color-rose-dark:  var(--rose-dark);
+  --color-gold:       var(--gold);
+  --color-ink:        var(--ink);
+  --color-ink-light:  var(--ink-light);
+
+  /* Font: Fredoka untuk display (judul playful), Nunito untuk body (bersih) */
   --font-display: var(--font-fredoka), ui-rounded, system-ui, sans-serif;
-  --font-body: var(--font-nunito), system-ui, sans-serif;
+  --font-body:    var(--font-nunito), ui-rounded, system-ui, sans-serif;
 }
 
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
@@ -31,18 +50,184 @@ body {
   color: var(--ink);
   min-height: 100dvh;
   overflow-x: hidden;
+  /* Safe area untuk notch/rounded corner HP */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  /* Background polkadot samar */
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 193, 209, 0.25) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
 }
 
-/* Tombol/elemen interaktif nyaman untuk jari (min 44px) */
+/* ─── Touch Target Minimum ─────────────────────────────────────────────────── */
+button,
+[role="button"],
+a {
+  touch-action: manipulation;
+}
 button,
 [role="button"] {
   min-height: 44px;
-  touch-action: manipulation;
 }
 
-/* Hormati pengguna yang mematikan animasi */
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blush);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink);
+}
+
+/* ─── Selection Color ─────────────────────────────────────────────────────── */
+::selection {
+  background: var(--blush);
+  color: var(--rose-dark);
+}
+
+/* ─── Tipografi Dasar ─────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+p, li, span, label, input, textarea {
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+/* ─── Komponen Reusable ───────────────────────────────────────────────────── */
+
+/* Badge pill khas section header */
+.badge-pill {
+  display: inline-block;
+  border-radius: 9999px;
+  background: rgba(255, 217, 199, 0.7);
+  padding: 0.2rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+/* Kartu kaca buram (glassmorphism ringan) */
+.card-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 194, 209, 0.6);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card-glass:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Input style seragam */
+.input-sweet {
+  width: 100%;
+  border-radius: 1rem;
+  border: 2px solid var(--blush);
+  background: rgba(255, 247, 240, 0.5);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+.input-sweet:focus {
+  outline: none;
+  border-color: var(--rose);
+}
+.input-sweet::placeholder {
+  color: rgba(74, 44, 58, 0.35);
+}
+
+/* Tombol utama */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  background: var(--rose);
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.8rem 1.75rem;
+  box-shadow: 0 4px 12px rgba(229, 72, 111, 0.3);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  cursor: pointer;
+  will-change: transform;
+}
+.btn-primary:hover {
+  background: var(--rose-dark);
+  box-shadow: 0 6px 20px rgba(229, 72, 111, 0.4);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ─── Next/Image wrapper ──────────────────────────────────────────────────── */
+/* Pastikan gambar mengisi container sepenuhnya */
+.img-polaroid {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--peach);
+}
+.img-polaroid img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+.img-polaroid:hover img {
+  transform: scale(1.04);
+}
+
+/* ─── Animasi Keyframe (CSS Fallback) ─────────────────────────────────────── */
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-120px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 72, 111, 0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(229, 72, 111, 0); }
+}
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+.animate-float-up   { animation: float-up 3s ease-out forwards; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--peach) 25%,
+    var(--cream) 50%,
+    var(--peach) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -51,5 +236,10 @@ button,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .animate-float-up,
+  .animate-pulse-glow,
+  .animate-shimmer {
+    animation: none !important;
   }
 }
