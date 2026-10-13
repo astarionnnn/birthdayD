@@ -84,13 +84,13 @@ export default function FriendMessages() {
 
         {/* Tombol Aksi Tambah Pesan */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <Link
+          {/* <Link
             href="/kirim-ucapan"
             target="_blank"
             className="inline-flex items-center gap-2 rounded-full bg-rose px-6 py-2.5 font-display text-xs sm:text-sm font-bold text-white shadow-md hover:bg-rose/90 transition-transform active:scale-95 cursor-pointer"
           >
             ✍️ Buka Form /kirim-ucapan (Bagikan ke Teman)
-          </Link>
+          </Link> */}
 
           <button
             type="button"
