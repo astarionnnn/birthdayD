@@ -26,7 +26,7 @@ export const couponsData: CouponItem[] = [
     id: "coupon-2",
     code: "BEBAS-NGAMBEK",
     title: "Kupon Bebas Ngambek Seharian 😇", // [GANTI]
-    description: "Aku wajib sabar ekstra, selalu nurut, dan dilarang membalas ngambek seharian penuh.", // [GANTI]
+    description: "Bebas ngambek satu hari aja si ya gausa lama lamaaa.", // [GANTI]
     icon: "🕊️",
     terms: "Masa berlaku 24 jam sejak klaim!", // [GANTI]
     expiresNote: "Berlaku selama masih ada rasa sayang (selamanya)", // [GANTI]
@@ -35,7 +35,7 @@ export const couponsData: CouponItem[] = [
     id: "coupon-3",
     code: "TRAKTIR-JAJAN",
     title: "Kupon Traktir Kuliner Bebas 🍜", // [GANTI]
-    description: "Pilih makanan atau jajanan apa pun yang lagi kamu idamkan, tagihan aku yang tanggung!", // [GANTI]
+    description: "Ayoo kita kulineran apapun yang kamu mau akuu juga mau!", // [GANTI]
     icon: "🍕",
     terms: "Wajib dihabiskan berdua ya!", // [GANTI]
     expiresNote: "Berlaku sampai dompetku ada isinya (alias selamanya 😅)", // [GANTI]
@@ -62,16 +62,16 @@ export const couponsData: CouponItem[] = [
     id: "coupon-6",
     code: "ANTAR-JEMPUT",
     title: "Kupon Supir Pribadi Siaga 🚗", // [GANTI]
-    description: "Layanan antar jemput ke mana pun dengan senyum ramah dan playlist lagu favoritmu.", // [GANTI]
+    description: "Layanan antar jemput ke mana pun dengan senyum ramah, sementara pake motor dulu soon pake jet.", // [GANTI]
     icon: "🚘",
     terms: "Cukup kabari 30 menit sebelumnya!", // [GANTI]
-    expiresNote: "Berlaku selama SIM-ku masih aktif (dan sayang masih ada)", // [GANTI]
+    expiresNote: "Berlaku selama SIM-ku masih aktif (duh dah ga aktif lagi wkwk)", // [GANTI]
   },
   {
     id: "coupon-7",
     code: "SATU-PERMINTAAN",
     title: "Kupon Permintaan Bebas (Genie Wish) 🧞‍♂️", // [GANTI]
-    description: "Satu permintaan bebas apa saja selama masih dalam batas wajar dan halal.", // [GANTI]
+    description: "Satu permintaan bebas apa saja selama masih dalam batas wajar", // [GANTI]
     icon: "✨",
     terms: "Gunakan dengan bijak!", // [GANTI]
     expiresNote: "Hati-hati dipakai, stoknya cuma 1 — tapi rasa sayangnya unlimited 🌈", // [GANTI]

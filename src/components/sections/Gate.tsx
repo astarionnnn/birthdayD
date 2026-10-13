@@ -232,13 +232,13 @@ export default function Gate({ onUnlock }: GateProps) {
               Buka Kejutan 🎁
             </button>
 
-            <button
+            {/* <button
               type="button"
               onClick={handleDirectOpen}
               className="text-xs font-semibold text-rose/80 underline decoration-rose/30 hover:text-rose cursor-pointer py-1"
             >
               Langsung Buka Saja (Bypass PIN) 🚀
-            </button>
+            </button> */}
           </div>
         </form>
 

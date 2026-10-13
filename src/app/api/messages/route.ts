@@ -102,7 +102,7 @@ export async function GET() {
   try {
     const { data, error } = await supabaseAdmin
       .from("messages")
-      .select("id, name, message, color, created_at")
+      .select("id, name, message, created_at")
       .order("created_at", { ascending: false })
       .limit(50);
 
@@ -111,9 +111,15 @@ export async function GET() {
       return NextResponse.json({ success: true, data: MOCK_MESSAGES, isMock: true });
     }
 
+    // Berikan warna variatif jika kolom color belum ada di database
+    const mapped = (data && data.length > 0 ? data : MOCK_MESSAGES).map((msg, i) => ({
+      ...msg,
+      color: (msg as { color?: string }).color || NOTE_COLORS[i % NOTE_COLORS.length],
+    }));
+
     return NextResponse.json({
       success: true,
-      data: data && data.length > 0 ? data : MOCK_MESSAGES,
+      data: mapped,
     });
   } catch (err) {
     console.error("[GET /api/messages] Unexpected error:", err);
@@ -178,16 +184,14 @@ export async function POST(req: NextRequest) {
     // ── Sanitasi ───────────────────────────────────────────────────────────────
     const name = sanitize(rawName);
     const message = sanitize(rawMessage);
-    // Validasi warna — hanya izinkan dari daftar aman
     const color = NOTE_COLORS.includes(rawColor) ? rawColor : NOTE_COLORS[0];
-
-    const newMsg = { name, message, color };
 
     // ── Simpan ke Supabase ─────────────────────────────────────────────────────
     if (isServerSupabaseConfigured && supabaseAdmin) {
+      // Coba insert dengan { name, message } (kompatibel dengan schema saat ini)
       const { data, error } = await supabaseAdmin
         .from("messages")
-        .insert([newMsg])
+        .insert([{ name, message }])
         .select()
         .single();
 
@@ -199,10 +203,14 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      return NextResponse.json({ success: true, data });
+      return NextResponse.json({
+        success: true,
+        data: { ...data, color },
+      });
     }
 
     // Mock fallback
+    const newMsg = { name, message, color };
     return NextResponse.json({
       success: true,
       data: { id: `local-${Date.now()}`, ...newMsg, created_at: new Date().toISOString() },

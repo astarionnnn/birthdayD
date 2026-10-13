@@ -15,7 +15,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   recipientName: "Divya", // [GANTI] nama dia (yang akan muncul di mana-mana)
-  senderName: "Aku yang Paling Beruntung", // [GANTI] nama/sebutan kamu buat diri sendiri
+  senderName: "Daffa Maulana Putra.", // [GANTI] nama/sebutan kamu buat diri sendiri
   birthday: "2003-10-14", // [GANTI] format YYYY-MM-DD tanggal ulang tahun dia
   anniversaryDate: "2025-10-15", // [GANTI] format YYYY-MM-DD tanggal jadian / tanggal spesial pertama
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",

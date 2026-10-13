@@ -29,9 +29,7 @@ export async function POST(req: NextRequest) {
     if (isServerSupabaseConfigured && supabaseAdmin) {
       const { error } = await supabaseAdmin.from("quiz_results").insert([
         {
-          recipient_name: recipientName,
           score,
-          total_questions: totalQuestions,
         },
       ]);
 

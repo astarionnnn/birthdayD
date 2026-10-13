@@ -22,11 +22,11 @@ export interface GiftConfig {
 
 export const giftConfig: GiftConfig = {
   badge: "KADO SPESIAL 🎁", // [GANTI]
-  boxTitle: "Ada Paket Spesial Buat Kamu!", // [GANTI]
-  boxSubtitle: "Khusus untuk yang hari ini lagi nambah umur jadi makin cakep & gemesin.", // [GANTI]
+  boxTitle: "PAKEEETTTT!!!", // [GANTI]
+  boxSubtitle: "Khusus untuk yang hari ini lagi nambah umur jadi makin lucuu & gemesin.", // [GANTI]
   tapHint: "Ketuk kotak kado di bawah untuk membukanya! ✨", // [GANTI]
   openedTitle: "SELAMAT ULANG TAHUN! 🥳🎂", // [GANTI]
-  openedGreeting: "Horeee! Kado virtualnya berhasil dibuka! 🎉", // [GANTI]
+  openedGreeting: "Horeee! Kadonya berhasil dibuka! 🎉", // [GANTI]
   mainMessage:
     "Mungkin kado ini gak bisa langsung dibungkus pakai kertas kado berkilau, tapi semua doa terbaik, rasa sayang tulus, dan janji buat selalu ada di sampingmu ada di sini.", // [GANTI]
   wishes: [
@@ -40,13 +40,13 @@ export const giftConfig: GiftConfig = {
       id: "wish-2",
       emoji: "💸", // [GANTI]
       title: "Rezeki & Karier Mengalir Deras", // [GANTI]
-      desc: "Biar wishlist belanjaannya checkout semua tanpa mikir dua kali!", // [GANTI]
+      desc: "Semoga langsung keterima kerja di tempat yang greenflag, gaji 2 digit", // [GANTI]
     },
     {
       id: "wish-3",
       emoji: "🧘‍♀️", // [GANTI]
       title: "Bebas dari Overthinking", // [GANTI]
-      desc: "Kalau lagi pusing atau capek, ingat selalu ada aku yang siap jadi tempat bersandar.", // [GANTI]
+      desc: "Kalau lagi pusing atau capek, ingat selalu ada aku yaa sayang hehe", // [GANTI]
     },
     {
       id: "wish-4",
@@ -62,5 +62,5 @@ export const giftConfig: GiftConfig = {
     },
   ],
   physicalGiftHint:
-    "P.S. Kado aslinya coba cek di dekat kamu sekarang atau tanyakan langsung ke pengirimnya ya! 🤫📦", // [GANTI]
+    "P.S. Kado aslinya menyusul yaaaa!! 🤫📦", // [GANTI]
 };

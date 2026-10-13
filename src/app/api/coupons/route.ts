@@ -27,14 +27,23 @@ export async function GET() {
   let claimedIds: string[] = [];
 
   if (isServerSupabaseConfigured && supabaseAdmin) {
-    const { data, error } = await supabaseAdmin
-      .from("coupon_claims")
-      .select("coupon_id, claimed_at");
+    // 1. Coba baca dari tabel 'coupons' (skema aktif di database)
+    const { data: couponsRows, error } = await supabaseAdmin
+      .from("coupons")
+      .select("id, claimed");
 
-    if (error) {
-      console.error("[GET /api/coupons] Supabase error:", error.message);
+    if (!error && couponsRows) {
+      claimedIds = couponsRows
+        .filter((r) => r.claimed === true)
+        .map((r) => r.id);
     } else {
-      claimedIds = (data ?? []).map((row) => row.coupon_id);
+      // Fallback ke tabel 'coupon_claims'
+      const { data: claimRows } = await supabaseAdmin
+        .from("coupon_claims")
+        .select("coupon_id");
+      if (claimRows) {
+        claimedIds = claimRows.map((r) => r.coupon_id);
+      }
     }
   }
 
@@ -80,37 +89,45 @@ export async function POST(req: NextRequest) {
 
     // ── Simpan ke Supabase ────────────────────────────────────────────────────
     if (isServerSupabaseConfigured && supabaseAdmin) {
-      // Cek duplikat terlebih dahulu (lebih eksplisit dari mengandalkan 23505)
+      // Cek apakah sudah pernah diklaim di tabel 'coupons'
       const { data: existing } = await supabaseAdmin
-        .from("coupon_claims")
-        .select("coupon_id")
-        .eq("coupon_id", couponId)
+        .from("coupons")
+        .select("id, claimed")
+        .eq("id", couponId)
         .maybeSingle();
 
-      if (existing) {
+      if (existing?.claimed) {
         return NextResponse.json(
           { success: false, error: "Kupon ini sudah pernah diklaim sebelumnya.", alreadyClaimed: true },
           { status: 409 }
         );
       }
 
-      const { error: insertError } = await supabaseAdmin
-        .from("coupon_claims")
-        .insert({ coupon_id: couponId, coupon_title: couponTitle, claimed_at: claimedAt.toISOString() });
+      // Upsert ke tabel 'coupons'
+      const { error: upsertErr } = await supabaseAdmin
+        .from("coupons")
+        .upsert({
+          id: couponId,
+          claimed: true,
+          claimed_at: claimedAt.toISOString(),
+        });
 
-      if (insertError) {
-        // Tangkap race condition unique violation
-        if (insertError.code === "23505") {
+      if (upsertErr) {
+        // Fallback coba ke 'coupon_claims'
+        const { error: insertErr } = await supabaseAdmin
+          .from("coupon_claims")
+          .insert({
+            coupon_id: couponId,
+            coupon_title: couponTitle,
+            claimed_at: claimedAt.toISOString(),
+          });
+
+        if (insertErr && insertErr.code === "23505") {
           return NextResponse.json(
             { success: false, error: "Kupon ini sudah diklaim (konflik).", alreadyClaimed: true },
             { status: 409 }
           );
         }
-        console.error("[POST /api/coupons] Insert error:", insertError.message);
-        return NextResponse.json(
-          { success: false, error: "Gagal menyimpan klaim ke database." },
-          { status: 500 }
-        );
       }
     }
 

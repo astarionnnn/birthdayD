@@ -25,7 +25,7 @@ export interface QuizConfig {
 export const quizConfig: QuizConfig = {
   badge: "TES KECOCOKAN KITA 🧩", // [GANTI]
   title: "Seberapa Kenal Kamu Sama Aku?", // [GANTI]
-  subtitle: "Coba buktikan kepekaan dan daya ingatmu lewat 5 pertanyaan krusial ini!", // [GANTI]
+  subtitle: "Coba buktikan kejagoanmu lewat 5 pertanyaan ini!", // [GANTI]
   questions: [
     {
       id: "q-1",
@@ -36,8 +36,8 @@ export const quizConfig: QuizConfig = {
         "Dua-duanya sama aja", // [GANTI]
         "Tukang parkirnya", // [GANTI]
       ],
-      correctIndex: 0,
-      explanation: "Haha! Ujung-ujungnya pasti bilang 'Terserah mau makan apa aja' kan! 😆", // [GANTI]
+      correctIndex: 3,
+      explanation: "u know what i thin yeahhhh wkwkw", // [GANTI]
       wrongAnswerResponses: [
         "Wah, salah besar! Tapi gapapa, tetep disayang kok 😄", // [GANTI]
         "Hmm, kamu kurang memperhatikan aku nih! Denda: kasih aku 1 pelukan 🥺", // [GANTI]
@@ -51,10 +51,10 @@ export const quizConfig: QuizConfig = {
         "Senyum manisnya yang bikin adem", // [GANTI]
         "Tawanya yang nular", // [GANTI]
         "Tatapan matanya", // [GANTI]
-        "Semuanya tanpa terkecuali!", // [GANTI]
+        "Semuanya!!!", // [GANTI]
       ],
       correctIndex: 3,
-      explanation: "Betul banget! Dari ujung rambut sampai ujung kaki semuanya bikin jatuh cinta berkali-kali! 🥰", // [GANTI]
+      explanation: "Hehe i love u sayang 🥰", // [GANTI]
       wrongAnswerResponses: [
         "Jawaban kamu lucu, tapi masih salah! Coba tanya langsung aja ya 😏", // [GANTI]
         "Hampir! Tapi sepertinya kamu masih butuh lebih banyak waktu buat kenali aku 😄", // [GANTI]
@@ -63,36 +63,36 @@ export const quizConfig: QuizConfig = {
     },
     {
       id: "q-3",
-      question: "Kalau kita lagi nonton film berdua, siapa yang paling sering ketiduran duluan? 🍿", // [GANTI]
+      question: "Kalimat apa yang sering diucapkan Divya kepada Cowoknya?🍿", // [GANTI]
       options: [
-        "Kamu pas intro film", // [GANTI]
-        "Aku di pertengahan cerita", // [GANTI]
-        "Gak ada, kita nonton sampai tamat", // [GANTI]
-        "Ngemilnya yang habis duluan", // [GANTI]
+        "Kamuu kok ganteng banget si sayang", // [GANTI]
+        "Kamu masih sayang aku?", // [GANTI]
+        "Kenyang banget aku sayang", // [GANTI]
+        "I love u sayangg", // [GANTI]
       ],
       correctIndex: 1,
-      explanation: "Ngaku deh! Padahal awalnya yang ngajak nonton paling semangat! 😴", // [GANTI]
+      explanation: "SAYANGG BANYAKK BANYAKKKK!", // [GANTI]
       wrongAnswerResponses: [
-        "Salah! Tapi oke, aku maafin. Cukup bayar dengan 1 senyuman 😁", // [GANTI]
-        "Hmm... aku rasa kamu sedang melindungi pelakunya 🕵️", // [GANTI]
-        "Nope! Tapi jawaban ini cukup menghibur sih, hehe 😂", // [GANTI]
+        "Makasii ya sayang, emang gue ganteng maxxx 😁", // [GANTI]
+        "Kalimat ini muncul jikaa setelah makan", // [GANTI]
+        "I love u moreee sayangg", // [GANTI]
       ],
     },
     {
       id: "q-4",
       question: "Kalau kamu lagi badmood / ngambek, pertolongan pertama paling ampuh apa? 🍦", // [GANTI]
       options: [
-        "Dibelikan es krim & seblak", // [GANTI]
+        "Dicium sebanyak banyaknya", // [GANTI]
         "Dipeluk erat-erat", // [GANTI]
-        "Ditransfer uang jajan", // [GANTI]
+        "Berkeliling jogja", // [GANTI]
         "Semua opsi di atas sekaligus!", // [GANTI]
       ],
       correctIndex: 3,
-      explanation: "Paket lengkap anti-gagal! Gak ada ceritanya masih cemberut setelah ini! 🥳", // [GANTI]
+      explanation: "Hehe, mau peluk cium dong sayangg 🥳", // [GANTI]
       wrongAnswerResponses: [
-        "Kurang lengkap! Harus paket komplit biar manjur 😤", // [GANTI]
-        "Nah ini tanda kamu butuh riset lebih lanjut tentang aku 📋", // [GANTI]
-        "Salah dong! Tapi ide bagus, dicatat dulu ah buat referensi 😂", // [GANTI]
+        "Bolee si tapi mosoo cium doang?", // [GANTI]
+        "Mau si dipeluk erat tapi plus cium juga dong", // [GANTI]
+        "Strolling around jogja is the best, with u", // [GANTI]
       ],
     },
     {

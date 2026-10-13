@@ -16,69 +16,66 @@ export interface TimelineItem {
 export const timelineData: TimelineItem[] = [
   {
     id: "momen-1",
-    date: "14 Februari 2023", // [GANTI]
-    badge: "Momen Awal", // [GANTI]
+    date: "26 Juni 2025", // [GANTI]
+    badge: "PDKT-PDKT", // [GANTI]
     emoji: "👀",
-    title: "Hari Pertama Bertemu", // [GANTI]
+    title: "Awal perjalanan", // [GANTI]
     story:
       "Awalnya saling tatap canggung dan pasang muka jutek. Siapa sangka orang asing ini sekarang jadi rumah ternyaman buat pulang.", // [GANTI]
-    location: "Sudut Kafe Kota", // [GANTI]
-    image: "/images/timeline/foto-1.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+    location: "Jalan Sambo, Kalimantan", // [GANTI]
+    image: "/images/timeline/foto-1.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-2",
-    date: "25 Maret 2023", // [GANTI]
-    badge: "First Date", // [GANTI]
+    date: "23 Agustus 2025", // [GANTI]
+    badge: "Gelex Date(?)", // [GANTI]
     emoji: "🥤",
-    title: "Kencan Pertama yang Penuh Grogi", // [GANTI]
+    title: "Kita melakukan Date tapi Gelex", // [GANTI]
     story:
-      "Tanganku gemeteran sampai es teh tumpah di meja. Kamu malah ketawa manis banget dan bilang 'santai aja kali!'.", // [GANTI]
-    location: "Tempat Makan Favorit", // [GANTI]
-    image: "/images/timeline/foto-2.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+      "Bisa dilihat, wajah wajah after dari kalimantan yang satu gelap yang satu abu abu wkwkw.", // [GANTI]
+    location: "GSP", // [GANTI]
+    image: "/images/timeline/foto-2.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-3",
-    date: "10 Agustus 2023", // [GANTI]
-    badge: "Momen Konyol", // [GANTI]
+    date: "22 Oktober 2025", // [GANTI]
+    badge: "First Photobox", // [GANTI]
     emoji: "🛵",
-    title: "Kehujanan Bareng di Emperan Toko", // [GANTI]
+    title: "Photobox pertama kita nichhh", // [GANTI]
     story:
-      "Sepatu basah kuyup karena jas hujan cuma satu. Tapi makan semangkuk mie instan panas berdua rasanya seru banget.", // [GANTI]
-    location: "Depan Minimarket Pinggir Jalan", // [GANTI]
-    image: "/images/timeline/foto-3.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+      "Aslinya si cuma mau ngemall yak, tapi coba deh kok menarik", // [GANTI]
+    image: "/images/timeline/foto-3.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-4",
-    date: "24 Desember 2023", // [GANTI]
-    badge: "Liburan Berdua", // [GANTI]
-    emoji: "🌅",
-    title: "Nyasar Bareng yang Berujung Indah", // [GANTI]
+    date: "14 Oktober 2025", // [GANTI]
+    badge: "Divya Days", // [GANTI]
+    emoji: "🌅🎂",
+    title: "Harinya Divya Artha Zeinia ku", // [GANTI]
     story:
-      "GPS ngaco sampai muter ke jalan buntu di puncak bukit. Bonusnya kita dapat pemandangan matahari terbenam paling cantik.", // [GANTI]
-    location: "Bukit Angin Sejuk", // [GANTI]
-    image: "/images/timeline/foto-4.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+      "Setahun yang lalu, dan sekarang kembali lagi di tanggal 14 Oktober itu, Selamat Ulang Tahun Sayangg!", // [GANTI]
+    image: "/images/timeline/foto-4.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-5",
-    date: "14 Februari 2024", // [GANTI]
-    badge: "Anniversary", // [GANTI]
-    emoji: "🎂",
+    date: "00 Random 2026", // [GANTI]
+    badge: "Random Selfie", // [GANTI]
+    emoji: "🌅",
     title: "Satu Tahun Perjalanan Cerita Kita", // [GANTI]
     story:
-      "Merayakan 365 hari penuh tawa, obrolan larut malam, dan drama kecil yang selalu berakhir dengan pelukan hangat.", // [GANTI]
-    location: "Taman Kota", // [GANTI]
-    image: "/images/timeline/foto-5.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+      "Memilih foto ini karena kamu cakep banget disinii buset gakuat aku pingsan", // [GANTI]
+    location: "Semua tempat", // [GANTI]
+    image: "/images/timeline/foto-5.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-6",
-    date: "20 Juli 2024", // [GANTI]
-    badge: "Hari Biasa yang Hangat", // [GANTI]
+    date: "11 Juni 2026", // [GANTI]
+    badge: "Couple Days", // [GANTI]
     emoji: "🍲",
-    title: "Misi Berburu Kuliner Tengah Malam", // [GANTI]
+    title: "Kita terlalu lucu", // [GANTI]
     story:
-      "Tiba-tiba lapar jam 11 malam dan keliling cari martabak manis. Hal sederhana yang selalu bikin bahagia saat bersamamu.", // [GANTI]
-    location: "Kedai Kaki Lima", // [GANTI]
-    image: "/images/timeline/foto-6.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+      "Lucu banget sii couple couple gini, beso kita cari couple yang banyak lagi sayangg", // [GANTI]
+    image: "/images/timeline/foto-6.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
   {
     id: "momen-7",
