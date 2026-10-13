@@ -86,6 +86,6 @@ export const timelineData: TimelineItem[] = [
     story:
       "Sekarang kamu bertambah usia satu tahun lagi. Tetap jadi sosok yang ceria, sehat selalu, dan mari buat ribuan kenangan baru lagi.", // [GANTI]
     location: "Di Hatiku Selamanya ❤️", // [GANTI]
-    image: "/images/timeline/foto-7.jpg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
+    image: "/images/timeline/foto-7.jpeg", // [GANTI] ganti dengan nama file foto kamu (taruh di public/images/timeline/)
   },
 ];
