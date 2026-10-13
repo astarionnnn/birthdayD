@@ -134,15 +134,3 @@ git push origin main
 Setelah deploy, isi `NEXT_PUBLIC_SITE_URL` di Vercel dengan URL produksi kamu.
 
 ---
-
-## ✅ Checklist Sebelum Deploy
-
-- [ ] Ubah semua `// [GANTI]` di `src/data/`
-- [ ] Tambah foto di `public/images/timeline/`
-- [ ] Tambah `public/audio/music.mp3`
-- [ ] Buat & taruh `public/og.png` (1200×630)
-- [ ] Isi `.env.local` dengan key Supabase & Telegram
-- [ ] Jalankan `npm run build` — pastikan tidak ada error
-- [ ] Test di HP (jalankan `npm run dev`, buka dari HP satu Wi-Fi)
-- [ ] Test klaim kupon → cek notifikasi Telegram
-- [ ] Test kirim ucapan di `/kirim-ucapan`
